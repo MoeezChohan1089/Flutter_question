@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_question/constants.dart';
 import 'package:flutter_question/screens/quiz/quiz_screen.dart';

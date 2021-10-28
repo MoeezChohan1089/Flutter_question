@@ -5,12 +5,13 @@ import 'package:flutter_question/controllers/question_controller.dart';
 import '../../../constants.dart';
 
 class Option extends StatelessWidget {
-
   final String text;
   final int index;
   final VoidCallback press;
 
-  const Option({Key? key, required this.text, required this.index, required this.press}) : super(key: key);
+  const Option(
+      {Key? key, required this.text, required this.index, required this.press})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class Option extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${index}. $text",
+                    "$index.$text",
                     style: TextStyle(color: getTheRightColor(), fontSize: 16),
                   ),
                   Container(

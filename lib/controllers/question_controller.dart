@@ -24,8 +24,7 @@ class QuestionController extends GetxController
             id: question['id'],
             question: question['question'],
             options: question['options'],
-            answer: question['answer_index']
-        ),
+            answer: question['answer_index']),
       )
       .toList();
   List<Question> get questions => this._questions;
@@ -61,7 +60,9 @@ class QuestionController extends GetxController
 
     // start our animation
     // Once 60s is completed go to the next qn
-    _animationController.forward().whenComplete(nextQuestion);
+    _animationController.forward().whenComplete(() {
+      nextQuestion();
+    });
     _pageController = PageController();
     super.onInit();
   }
@@ -80,16 +81,20 @@ class QuestionController extends GetxController
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
 
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
-
-    // It will stop the counter
-    _animationController.stop();
+    if (_correctAns == _selectedAns) {
+      _numOfCorrectAns++;
+      _animationController.stop();
+      Future.delayed(Duration(seconds: 2), () {
+        nextQuestion();
+      });
+    } else if (_correctAns != _selectedAns) {
+      initialQuestion();
+    }
     update();
 
+    // It will stop the counter
+
     // Once user select an ans after 3s it will go to the next qn
-    Future.delayed(Duration(seconds: 2), () {
-      nextQuestion();
-    });
   }
 
   void nextQuestion() {
@@ -107,6 +112,36 @@ class QuestionController extends GetxController
     } else {
       // Get package provide us simple way to naviigate another page
       Get.to(ScoreScreen());
+    }
+  }
+
+  void initialQuestion() {
+    _isAnswered = false;
+
+    _animationController.reset();
+
+    _pageController.jumpToPage(0);
+
+    _animationController.forward().whenComplete(nextQuestion);
+    // Reset the counter
+    // _animationController.reset();
+
+    // Then start it again
+    // Once timer is finish go to the next qn
+    // _animationController.forward().whenComplete(nextQuestion);
+  }
+
+  void lastFivePage(int numberOfPage) {
+    if (_questionNumber.value != _questions.length) {
+      _isAnswered = false;
+      _pageController.initialPage - numberOfPage;
+
+      // Reset the counter
+      // _animationController.reset();
+
+      // Then start it again
+      // Once timer is finish go to the next qn
+      // _animationController.forward().whenComplete(nextQuestion);
     }
   }
 

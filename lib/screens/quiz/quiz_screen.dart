@@ -16,7 +16,10 @@ class QuizScreen extends StatelessWidget {
         backgroundColor: Colors.green,
         elevation: 0,
         actions: [
-          FlatButton(onPressed: _controller.nextQuestion, child: Text("Skip")),
+          ElevatedButton(
+            onPressed: _controller.nextQuestion,
+            child: Text("Skip"),
+          ),
         ],
       ),
       body: Body(),
