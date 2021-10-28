@@ -8,23 +8,29 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Color(0xFF25a449),
       body: Stack(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(88.0),
+            child: Container(
+              child: Image.asset('assets/icons/Proxy.jpeg', width: 350, height: 200,),
+            ),
+          ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Spacer(flex: 2), //2/6
+                  Spacer(flex: 4), //2/6
                   Text(
                     "Let's start questioning,",
                     style: Theme.of(context).textTheme.headline4!.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text("Enter your informations below"),
-                  Spacer(), // 1/6
+                  Spacer(flex: 1,), // 1/6
                   InkWell(
                     onTap: () => Get.to(QuizScreen()),
                     child: Container(

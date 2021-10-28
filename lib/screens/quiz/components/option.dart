@@ -7,7 +7,7 @@ import '../../../constants.dart';
 class Option extends StatelessWidget {
 
   final String text;
-  final int index;
+  final int index ;
   final VoidCallback press;
 
   const Option({Key? key, required this.text, required this.index, required this.press}) : super(key: key);
@@ -47,7 +47,7 @@ class Option extends StatelessWidget {
                 children: [
                   Text(
                     "${index}. $text",
-                    style: TextStyle(color: getTheRightColor(), fontSize: 16),
+                    style: TextStyle(color: getTheRightColor(), fontSize: 15),
                   ),
                   Container(
                     height: 26,
@@ -61,7 +61,7 @@ class Option extends StatelessWidget {
                     ),
                     child: getTheRightColor() == kGrayColor
                         ? null
-                        : Icon(getTheRightIcon(), size: 16),
+                        : Icon(getTheRightIcon(), size: 15),
                   )
                 ],
               ),

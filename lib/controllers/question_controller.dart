@@ -10,6 +10,8 @@ class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
   // Lets animated our progress bar
 
+  var tempIndex =0;
+  var id= [];
   late AnimationController _animationController;
   late Animation _animation;
   // so that we can access our animation outside
@@ -80,14 +82,18 @@ class QuestionController extends GetxController
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
 
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
+    if (_correctAns == _selectedAns) {
+      _numOfCorrectAns++;}
+    else{
+
+   }
 
     // It will stop the counter
     _animationController.stop();
     update();
 
     // Once user select an ans after 3s it will go to the next qn
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1), () {
       nextQuestion();
     });
   }
@@ -98,19 +104,26 @@ class QuestionController extends GetxController
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
 
-      // Reset the counter
-      _animationController.reset();
+      // // Reset the counter
+     //  _animationController.reset();
 
       // Then start it again
       // Once timer is finish go to the next qn
       _animationController.forward().whenComplete(nextQuestion);
-    } else {
-      // Get package provide us simple way to naviigate another page
+    } else if(_isAnswered!=_selectedAns){
+      _questionNumber=_questionNumber-5;
+      _pageController.nextPage(
+          duration: Duration(milliseconds: 250), curve: Curves.ease);
+      _animationController.forward().whenComplete(nextQuestion);
+
+    }
+    else{
       Get.to(ScoreScreen());
     }
   }
-
   void updateTheQnNum(int index) {
-    _questionNumber.value = index + 1;
+      _questionNumber.value = index + 1;
   }
+
+
 }
